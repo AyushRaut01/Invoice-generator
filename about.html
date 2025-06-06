@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - InvoiceGen</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body { background: #f8f9fa; color: #333; }
+        .hero-section { background: linear-gradient(90deg, #3498db 60%, #2c3e50 100%); color: #fff; padding: 70px 0 40px 0; text-align: center; }
+        .hero-section h1 { font-size: 2.7rem; font-weight: 700; margin-bottom: 18px; }
+        .hero-section p { font-size: 1.2rem; margin-bottom: 25px; }
+        .site-header, .site-footer { background-color: #2c3e50; color: #ecf0f1; }
+        .site-logo { font-size: 24px; font-weight: 700; color: #fff; text-decoration: none; }
+        .nav-menu { display: flex; list-style: none; }
+        .nav-menu li { margin-left: 30px; }
+        .nav-menu a { color: #ecf0f1; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-menu a:hover, .nav-menu a.active { color: #3498db; }
+        .footer-links {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+        .footer-links li {
+            margin-bottom: 10px;
+            list-style: none;
+        }
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none !important;
+            transition: color 0.3s;
+            font-size: 14px;
+            padding: 2px 0;
+            display: inline-block;
+            border-bottom: 2px solid transparent;
+        }
+        .footer-links a:hover {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+            background: none;
+            text-decoration: none;
+        }
+        .site-footer {
+            background-color: #232f3e;
+            color: #ecf0f1;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+            font-size: 15px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        .footer-column h3 {
+            color: #3498db;
+            margin-bottom: 18px;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .footer-column p, .footer-links a {
+            color: #bdc3c7;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #34495e;
+            font-size: 14px;
+            color: #bdc3c7;
+        }
+        .footer-column {
+            min-width: 200px;
+        }
+        .about-section { padding: 50px 0; }
+        .about-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 16px rgba(44,62,80,0.07); padding: 32px 24px; text-align: center; transition: box-shadow 0.2s; }
+        .about-card:hover { box-shadow: 0 15px 32px rgba(44,62,80,0.18), 0 5.5px 10px rgba(44,62,80,0.10); }
+        .team-section { padding: 30px 0 0 0; }
+        .team-member { margin-bottom: 30px; }
+        .team-member img { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; margin-bottom: 10px; }
+        .custom-list {
+            list-style: none;
+            padding-left: 0;
+            font-size: 1.05rem;
+        }
+        .custom-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+        /* Roadmap Timeline Styles - GeeksforGeeks Style */
+        .roadmap-timeline {
+            position: relative;
+            margin: 40px 0 30px 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .roadmap-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(180deg, #3498db 0%, #232f3e 100%);
+            border-radius: 3px;
+            transform: translateX(-50%);
+        }
+        .roadmap-item {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            position: relative;
+            margin-bottom: 60px;
+        }
+        .roadmap-item.left {
+            flex-direction: row-reverse;
+        }
+        .roadmap-item.right {
+            flex-direction: row;
+        }
+        .roadmap-icon {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translate(-50%, 0);
+            z-index: 2;
+            width: 48px;
+            height: 48px;
+            background: #fff;
+            border-radius: 50%;
+            border: 4px solid #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.7rem;
+            color: #3498db;
+            box-shadow: 0 2px 12px rgba(44,62,80,0.10);
+        }
+        .roadmap-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 16px rgba(44,62,80,0.07);
+            padding: 0;
+            width: 320px;
+            position: relative;
+            margin-top: 0;
+            margin-bottom: 0;
+            transition: box-shadow 0.2s;
+        }
+        .roadmap-card:hover {
+            box-shadow: 0 15px 32px rgba(44,62,80,0.18), 0 5.5px 10px rgba(44,62,80,0.10);
+        }
+        .roadmap-card-header {
+            background: #3498db;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.15rem;
+            padding: 12px 20px;
+            border-radius: 10px 10px 0 0;
+            position: relative;
+        }
+        .roadmap-card-body {
+            padding: 18px 20px 16px 20px;
+            color: #333;
+            font-size: 1rem;
+            border-radius: 0 0 10px 10px;
+        }
+        /* Arrow pointers */
+        .roadmap-item.right .roadmap-card::before {
+            content: '';
+            position: absolute;
+            left: -18px;
+            top: 24px;
+            border-width: 10px 18px 10px 0;
+            border-style: solid;
+            border-color: transparent #3498db transparent transparent;
+        }
+        .roadmap-item.left .roadmap-card::before {
+            content: '';
+            position: absolute;
+            right: -18px;
+            top: 24px;
+            border-width: 10px 0 10px 18px;
+            border-style: solid;
+            border-color: transparent transparent transparent #3498db;
+        }
+        .roadmap-item.right {
+            margin-left: 60px;
+        }
+        .roadmap-item.left {
+            margin-right: 60px;
+        }
+        @media (max-width: 900px) {
+            .roadmap-card { width: 90vw; max-width: 340px; }
+        }
+        @media (max-width: 767px) {
+            .roadmap-timeline {
+                max-width: 100%;
+            }
+            .roadmap-timeline::before {
+                left: 20px;
+                transform: none;
+            }
+            .roadmap-item {
+                flex-direction: column !important;
+                align-items: flex-start;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+            .roadmap-icon {
+                left: 20px;
+                top: 0;
+                transform: none;
+                margin-bottom: 10px;
+            }
+            .roadmap-card {
+                margin-left: 50px !important;
+                margin-right: 0 !important;
+                width: calc(100vw - 80px);
+                min-width: 0;
+                max-width: 100%;
+            }
+            .roadmap-item.right .roadmap-card::before,
+            .roadmap-item.left .roadmap-card::before {
+                left: -18px;
+                right: auto;
+                border-width: 10px 18px 10px 0;
+                border-style: solid;
+                border-color: transparent #3498db transparent transparent;
+            }
+        }
+        .faq-section {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 16px rgba(44,62,80,0.07);
+            padding: 40px 24px 24px 24px;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+        }
+        .faq-heading {
+            color: #3498db;
+            font-weight: 700;
+            font-size: 2rem;
+        }
+        .faq-item {
+            margin-bottom: 18px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            box-shadow: 0 1px 6px rgba(44,62,80,0.04);
+            overflow: hidden;
+            border: 1px solid #e1e7ed;
+        }
+        .faq-toggle {
+            width: 100%;
+            background: #232f3e;
+            color: #fff;
+            border: none;
+            outline: none;
+            text-align: left;
+            padding: 18px 22px;
+            font-size: 1.08rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background 0.2s;
+        }
+        .faq-toggle:hover, .faq-toggle.active {
+            background: #3498db;
+            color: #fff;
+        }
+        .faq-arrow {
+            margin-right: 12px;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        .faq-toggle.active .faq-arrow {
+            transform: rotate(180deg);
+        }
+        .faq-content {
+            display: none;
+            padding: 0 22px 18px 22px;
+            background: #fff;
+            color: #232f3e;
+            font-size: 1rem;
+            border-top: 1px solid #e1e7ed;
+        }
+        .faq-item.open .faq-content {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @media (max-width: 600px) {
+            .faq-section { padding: 24px 5vw; }
+            .faq-heading { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="home.html" class="site-logo">InvoiceGen</a>
+            <ul class="nav-menu mb-0">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+    <section class="hero-section">
+        <div class="container">
+            <h1>About InvoiceGen</h1>
+            <p class="lead"><i class="bi bi-stars me-2"></i>Empowering freelancers and small businesses with simple, fast, and professional invoicing tools.</p>
+        </div>
+    </section>
+    <section class="about-section">
+        <div class="container">
+           
+            <!-- Timeline/History Section -->
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-10">
+                    <div class="about-card bg-light">
+                        <h4 class="mb-4 text-info"><i class="bi bi-clock-history me-2"></i>Our Journey</h4>
+                        <div class="roadmap-timeline">
+                            <div class="roadmap-item right">
+                                <span class="roadmap-icon"><i class="bi bi-rocket-takeoff"></i></span>
+                                <div class="roadmap-card">
+                                    <div class="roadmap-card-header">2021</div>
+                                    <div class="roadmap-card-body">InvoiceGen was launched to simplify invoicing for freelancers.</div>
+                                </div>
+                            </div>
+                            <div class="roadmap-item left">
+                                <span class="roadmap-icon"><i class="bi bi-people-fill"></i></span>
+                                <div class="roadmap-card">
+                                    <div class="roadmap-card-header">2022</div>
+                                    <div class="roadmap-card-body">Reached 1,000+ users and added receipt generation.</div>
+                                </div>
+                            </div>
+                            <div class="roadmap-item right">
+                                <span class="roadmap-icon"><i class="bi bi-globe2"></i></span>
+                                <div class="roadmap-card">
+                                    <div class="roadmap-card-header">2023</div>
+                                    <div class="roadmap-card-body">Expanded globally, supporting multiple currencies.</div>
+                                </div>
+                            </div>
+                            <div class="roadmap-item left">
+                                <span class="roadmap-icon"><i class="bi bi-stars"></i></span>
+                                <div class="roadmap-card">
+                                    <div class="roadmap-card-header">2024</div>
+                                    <div class="roadmap-card-body">Trusted by 5,000+ users and counting!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Features/Highlights Section -->
+            <div class="row g-4 mb-5">
+                <div class="col-12">
+                    <h3 class="text-center mb-4 text-primary"><i class="bi bi-award me-2"></i>Key Features</h3>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="about-card h-100">
+                        <i class="bi bi-lightning-charge text-warning" style="font-size:2rem;"></i>
+                        <h5 class="mt-2">Instant Invoices</h5>
+                        <p>Create and download invoices in seconds.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="about-card h-100">
+                        <i class="bi bi-lock-fill text-success" style="font-size:2rem;"></i>
+                        <h5 class="mt-2">Privacy First</h5>
+                        <p>Your data stays on your device, always private.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="about-card h-100">
+                        <i class="bi bi-currency-dollar text-info" style="font-size:2rem;"></i>
+                        <h5 class="mt-2">Multi-Currency</h5>
+                        <p>Bill clients in USD, INR, EUR, and more.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="about-card h-100">
+                        <i class="bi bi-printer-fill text-primary" style="font-size:2rem;"></i>
+                        <h5 class="mt-2">Print & PDF</h5>
+                        <p>Print or save invoices as PDF instantly.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Expanded Team Section -->
+            <div class="team-section mt-5">
+                <h3 class="text-center mb-4"><i class="bi bi-people-fill me-2"></i>Meet the Team</h3>
+                <div class="row justify-content-center">
+                    <div class="col-md-3 team-member">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ayush">
+                        <h5>Ayush</h5>
+                        <p><i class="bi bi-code-slash me-1"></i>Founder & Developer</p>
+                    </div>
+                    <div class="col-md-3 team-member">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Ayush">
+                        <h5>Ayush </h5>
+                        <p><i class="bi bi-brush me-1"></i>UI/UX Designer</p>
+                    </div>
+                   
+                </div>
+            </div>
+            <!-- FAQ Section -->
+            <div class="row justify-content-center mt-5 mb-5">
+                <div class="col-md-8">
+                    <h3 class="text-center mb-4 text-primary"><i class="bi bi-question-circle me-2"></i>Frequently Asked Questions</h3>
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq1-heading">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                                    <i class="bi bi-lightbulb me-2 text-info"></i>Is InvoiceGen really free to use?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" aria-labelledby="faq1-heading" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes! InvoiceGen is completely free for freelancers, small businesses, and entrepreneurs. There are no hidden charges or subscriptions.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq2-heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                                    <i class="bi bi-shield-lock me-2 text-success"></i>How is my data kept private?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" aria-labelledby="faq2-heading" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Your data never leaves your device. All invoice information is processed locally in your browser for maximum privacy and security.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq3-heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                                    <i class="bi bi-currency-exchange me-2 text-primary"></i>Can I bill clients in different currencies?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" aria-labelledby="faq3-heading" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Absolutely! InvoiceGen supports multiple currencies including USD, INR, EUR, and more for global invoicing.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faq4-heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                                    <i class="bi bi-printer me-2 text-warning"></i>How do I print or save my invoice as PDF?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" aria-labelledby="faq4-heading" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    After creating your invoice, simply use the Print or Download as PDF options provided. It's quick and easy!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End FAQ Section -->
+            <!-- Call to Action Section -->
+            <div class="row justify-content-center mt-5 mb-5">
+                <div class="col-md-20">
+                    <div class="about-card text-center text-white" style="background-color: #2c3e50;">
+                        <h3 class="mb-3"><i class="bi bi-rocket-takeoff me-2"></i>Ready to Create Your First Invoice?</h3>
+                        <p class="mb-4">Join thousands of freelancers and small businesses using InvoiceGen to simplify their billing.</p>
+                        <a href="index.html" class="btn btn-lg btn-light"><i class="bi bi-file-earmark-plus me-2"></i>Start Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="site-footer py-5">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3><i class="bi bi-info-circle-fill me-2"></i>About InvoiceGen</h3>
+                <p>Free invoice generator for freelancers, small businesses, and entrepreneurs. Simplify billing and get paid faster.</p>
+            </div>
+            <div class="footer-column">
+                <h3><i class="bi bi-link-45deg me-2"></i>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="home.html"><i class="bi bi-house-door me-1"></i> Home</a></li>
+                    <li><a href="about.html"><i class="bi bi-people me-1"></i> About Us</a></li>
+                    <li><a href="services.html"><i class="bi bi-gear me-1"></i> Services</a></li>
+                    <li><a href="contact.html"><i class="bi bi-envelope me-1"></i> Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3><i class="bi bi-briefcase-fill me-2"></i>Our Services</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="bi bi-file-earmark-text me-1"></i> Invoice Generator</a></li>
+                    <li><a href="#"><i class="bi bi-receipt me-1"></i> Receipt Maker</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3><i class="bi bi-telephone-fill me-2"></i> Contact Us</h3>
+                <p><i class="bi bi-envelope-at me-1"></i> Email: support@invoicegen.com</p>
+                <p><i class="bi bi-telephone me-1"></i> Phone: 123-4567</p>
+                <p><i class="bi bi-clock me-1"></i> Hours: Mon-Fri, 9am-5pm</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>InvoiceGen. All rights reserved by ayush.</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

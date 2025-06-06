@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - InvoiceGen</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body { background: #f8f9fa; color: #333; }
+        .hero-section { background: linear-gradient(90deg, #3498db 60%, #2c3e50 100%); color: #fff; padding: 70px 0 40px 0; text-align: center; }
+        .hero-section h1 { font-size: 2.7rem; font-weight: 700; margin-bottom: 18px; }
+        .hero-section p { font-size: 1.2rem; margin-bottom: 25px; }
+        .site-header, .site-footer { background-color: #2c3e50; color: #ecf0f1; }
+        .site-logo { font-size: 24px; font-weight: 700; color: #fff; text-decoration: none; }
+        .nav-menu { display: flex; list-style: none; }
+        .nav-menu li { margin-left: 30px; }
+        .nav-menu a { color: #ecf0f1; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-menu a:hover, .nav-menu a.active { color: #3498db; }
+        .footer-links {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+        .footer-links li {
+            margin-bottom: 10px;
+            list-style: none;
+        }
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none !important;
+            transition: color 0.3s;
+            font-size: 14px;
+            padding: 2px 0;
+            display: inline-block;
+            border-bottom: 2px solid transparent;
+        }
+        .footer-links a:hover {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+            background: none;
+            text-decoration: none;
+        }
+        .site-footer {
+            background-color: #232f3e;
+            color: #ecf0f1;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+            font-size: 15px;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        .footer-column h3 {
+            color: #3498db;
+            margin-bottom: 18px;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .footer-column p, .footer-links a {
+            color: #bdc3c7;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #34495e;
+            font-size: 14px;
+            color: #bdc3c7;
+        }
+        .footer-column {
+            min-width: 200px;
+        }
+        .services-section { padding: 50px 0; }
+        .service-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 16px rgba(44,62,80,0.07); padding: 32px 24px; text-align: center; transition: box-shadow 0.2s; margin-bottom: 30px; }
+        .service-card:hover { box-shadow: 0 15px 32px rgba(44,62,80,0.18), 0 5.5px 10px rgba(44,62,80,0.10); }
+        .service-icon { font-size: 2.5rem; color: #3498db; margin-bottom: 18px; }
+    </style>
+</head>
+<body>
+    <header class="site-header py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="home.html" class="site-logo">InvoiceGen</a>
+            <ul class="nav-menu mb-0">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+    <section class="hero-section">
+        <div class="container">
+            <h1>Our Services</h1>
+            <p>Explore our suite of tools designed to make your business run smoother.</p>
+            <a href="index.html" class="btn btn-primary shadow">Go to Invoice Generator</a>
+        </div>
+    </section>
+    <section class="services-section">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="service-icon">🧾</div>
+                        <h4>Invoice Generator</h4>
+                        <p>Create professional invoices in seconds, print or download as PDF.</p>
+                        <a href="index.html" class="btn btn-outline-primary btn-sm mt-2">Try Now</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="service-icon">📄</div>
+                        <h4>Receipt Maker</h4>
+                        <p>Generate simple receipts for your transactions (coming soon).</p>
+                        <a href="#" class="btn btn-outline-secondary btn-sm mt-2 disabled">Coming Soon</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="service-icon">📊</div>
+                        <h4>Expense Tracker</h4>
+                        <p>Track your business expenses and manage your finances (coming soon).</p>
+                        <a href="#" class="btn btn-outline-secondary btn-sm mt-2 disabled">Coming Soon</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="site-footer py-5">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3><i class="bi bi-info-circle-fill me-2"></i>About InvoiceGen</h3>
+                <p>Free invoice generator for freelancers, small businesses, and entrepreneurs. Simplify billing and get paid faster.</p>
+            </div>
+            <div class="footer-column">
+                <h3><i class="bi bi-link-45deg me-2"></i>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="home.html"><i class="bi bi-house-door me-1"></i> Home</a></li>
+                    <li><a href="about.html"><i class="bi bi-people me-1"></i> About Us</a></li>
+                    <li><a href="services.html"><i class="bi bi-gear me-1"></i> Services</a></li>
+                    <li><a href="contact.html"><i class="bi bi-envelope me-1"></i> Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3><i class="bi bi-briefcase-fill me-2"></i>Our Services</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="bi bi-file-earmark-text me-1"></i> Invoice Generator</a></li>
+                    <li><a href="#"><i class="bi bi-receipt me-1"></i> Receipt Maker</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3><i class="bi bi-telephone-fill me-2"></i> Contact Us</h3>
+                <p><i class="bi bi-envelope-at me-1"></i> Email: support@invoicegen.com</p>
+                <p><i class="bi bi-telephone me-1"></i> Phone: 123-4567</p>
+                <p><i class="bi bi-clock me-1"></i> Hours: Mon-Fri, 9am-5pm</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>InvoiceGen. All rights reserved by ayush.</p>
+        </div>
+    </footer>
+</body>
+</html> 

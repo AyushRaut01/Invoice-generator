@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvoiceGen - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body { background: #f8f9fa; color: #333; }
+        .hero-section {
+            background: linear-gradient(120deg, #eaf6fb 60%, #f8f9fa 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 80px 0 60px 0;
+        }
+        .hero-section .badge {
+            font-size: 1rem;
+            padding: 0.6em 1.2em;
+            border-radius: 2em;
+            background: #3498db;
+            color: #fff;
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+            display: inline-block;
+        }
+        .hero-section h1 {
+            font-size: 2.7rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #232f3e;
+        }
+        .hero-section p.lead {
+            font-size: 1.25rem;
+            color: #555;
+            margin-bottom: 32px;
+        }
+        .hero-section .btn-lg {
+            font-size: 1.15rem;
+            padding: 12px 32px;
+            border-radius: 30px;
+        }
+        .hero-section .btn-outline-primary {
+            background: #fff;
+            border: 2px solid #3498db;
+            color: #3498db;
+            margin-left: 10px;
+        }
+        .hero-section .btn-outline-primary:hover {
+            background: #3498db;
+            color: #fff;
+        }
+        .hero-section .hero-illustration {
+            max-width: 400px;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(44,62,80,0.10);
+        }
+        .hero-wave {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            width: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        @media (max-width: 767px) {
+            .hero-section {
+                padding: 50px 0 30px 0;
+            }
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            .hero-section .hero-illustration {
+                max-width: 90vw;
+            }
+        }
+        .features-section { padding: 60px 0; }
+        .feature-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 16px rgba(44,62,80,0.07); padding: 32px 24px; text-align: center; transition: box-shadow 0.2s; }
+        .feature-card:hover { box-shadow: 0 15px 32px rgba(44,62,80,0.18), 0 5.5px 10px rgba(44,62,80,0.10); }
+        .feature-icon { font-size: 2.5rem; color: #3498db; margin-bottom: 18px; }
+        .site-header, .site-footer { background-color: #2c3e50; color: #ecf0f1; }
+        .site-logo { font-size: 24px; font-weight: 700; color: #fff; text-decoration: none; }
+        .nav-menu { display: flex; list-style: none; }
+        .nav-menu li { margin-left: 30px; }
+        .nav-menu a { color: #ecf0f1; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-menu a:hover, .nav-menu a.active { color: #3498db; }
+        .footer-links {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+        .footer-links li {
+            margin-bottom: 10px;
+            list-style: none;
+        }
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none !important;
+            transition: color 0.3s;
+            font-size: 14px;
+            padding: 2px 0;
+            display: inline-block;
+            border-bottom: 2px solid transparent;
+        }
+        .footer-links a:hover {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+            background: none;
+            text-decoration: none;
+        }
+        .site-footer {
+            background-color: #232f3e;
+            color: #ecf0f1;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+            font-size: 15px;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        .footer-column h3 {
+            color: #3498db;
+            margin-bottom: 18px;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .footer-column p, .footer-links a {
+            color: #bdc3c7;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #34495e;
+            font-size: 14px;
+            color: #bdc3c7;
+        }
+        .footer-column {
+            min-width: 200px;
+        }
+        .custom-list {
+            list-style: none;
+            padding-left: 0;
+            font-size: 1.05rem;
+        }
+        .custom-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .vision-mission-section .about-card { transition: box-shadow 0.2s; }
+        .vision-mission-section .about-card:hover { box-shadow: 0 15px 32px rgba(44,62,80,0.18), 0 5.5px 10px rgba(44,62,80,0.10); }
+        /* Review Slider Styles */
+        .review-slider-container {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            margin: 0 auto;
+            max-width: 1100px;
+        }
+        .review-slider-track {
+            display: flex;
+            align-items: stretch;
+            gap: 32px;
+            animation: review-slide 32s linear infinite;
+            will-change: transform;
+        }
+        .review-slide {
+            min-width: 340px;
+            max-width: 340px;
+            flex: 0 0 340px;
+        }
+        @media (max-width: 900px) {
+            .review-slide, .review-slider-track { min-width: 260px; max-width: 260px; }
+        }
+        @media (max-width: 600px) {
+            .review-slide, .review-slider-track { min-width: 90vw; max-width: 90vw; }
+        }
+        @keyframes review-slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="home.html" class="site-logo">InvoiceGen</a>
+            <ul class="nav-menu mb-0">
+                <li><a href="home.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+    <section class="hero-section position-relative">
+        <div class="container position-relative" style="z-index:1;">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-md-start text-center">
+                    <span class="badge bg-primary mb-3">Free & Secure Online Invoicing</span>
+                    <h1 class="display-4 fw-bold mb-3">Professional Invoices in Seconds</h1>
+                    <p class="lead mb-4">Create beautiful, professional invoices for free. No signup required. Trusted by 5,000+ users.</p>
+                    <a href="index.html" class="btn btn-lg btn-primary shadow me-2">Create Invoice Now</a>
+                    <a href="services.html" class="btn btn-lg btn-outline-primary">See Features</a>
+                </div>
+                <div class="col-md-6 text-center mt-4 mt-md-0 d-flex justify-content-md-end">
+                    <img src="https://img.freepik.com/free-vector/bill-analysis-concept-illustration_114360-19348.jpg?semt=ais_hybrid&w=740" alt="Invoice Illustration" class="img-fluid hero-illustration">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="features-section">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">💡</div>
+                        <h4>Easy to Use</h4>
+                        <p>Intuitive interface lets you generate invoices in just a few clicks.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h4>Secure & Private</h4>
+                        <p>Your data stays on your device. No registration, no tracking.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h4>Fast & Free</h4>
+                        <p>Generate, print, or download invoices instantly, 100% free.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Vision & Mission Section -->
+    <section class="vision-mission-section py-5 bg-white">
+        <div class="container">
+            <div class="row justify-content-center align-items-center g-5">
+                <div class="col-md-6">
+                    <div class="feature-card">
+                        <h3 class="text-primary mb-3 text-center">Our Vision</h3>
+                        <p class="mb-3" style="font-size:1.1rem;">To empower every freelancer, entrepreneur, and small business to manage their billing with confidence and ease, anywhere in the world.</p>
+                        <ul class="custom-list mb-0">
+                            <li><span class="text-success me-2">&#10003;</span>Make invoicing accessible to all</li>
+                            <li><span class="text-success me-2">&#10003;</span>Promote financial independence</li>
+                            <li><span class="text-success me-2">&#10003;</span>Encourage digital transformation for small businesses</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="feature-card">
+                        <h3 class="text-success mb-3 text-center">Our Mission</h3>
+                        <p class="mb-3" style="font-size:1.1rem;">To provide a simple, secure, and free invoicing tool that saves you time, protects your privacy, and helps you get paid faster—so you can focus on what you do best.</p>
+                        <ul class="custom-list mb-0">
+                            <li><span class="text-primary me-2">&#10003;</span>Deliver a seamless, user-friendly experience</li>
+                            <li><span class="text-primary me-2">&#10003;</span>Ensure data privacy and security</li>
+                            <li><span class="text-primary me-2">&#10003;</span>Support users with fast, reliable tools</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- How It Works Section -->
+    <section class="how-it-works-section py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 text-primary"><i class="bi bi-gear-wide-connected me-2"></i>How It Works</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-3 col-sm-6">
+                    <div class="about-card h-100">
+                        <i class="bi bi-pencil-square text-primary" style="font-size:2rem;"></i>
+                        <h5 class="mt-2">Enter Details</h5>
+                        <p>Fill in your business, client, and invoice details in a simple form.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="about-card h-100">
+                        <i class="bi bi-list-check text-success" style="font-size:2rem;"></i>
+                        <h5 class="mt-2">Add Items</h5>
+                        <p>List your products or services, quantities, and prices.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="about-card h-100">
+                        <i class="bi bi-eye text-info" style="font-size:2rem;"></i>
+                        <h5 class="mt-2">Preview</h5>
+                        <p>See a live preview of your professional invoice before saving.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="about-card h-100">
+                        <i class="bi bi-download text-warning" style="font-size:2rem;"></i>
+                        <h5 class="mt-2">Download/Print</h5>
+                        <p>Download as PDF or print instantly—no signup required!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonials Section -->
+    <section class="testimonials-section py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 text-success"><i class="bi bi-chat-quote me-2"></i>What Our Users Say</h2>
+            <div class="review-slider-container">
+                <div class="review-slider-track">
+                    <div class="review-slide about-card h-100 text-center">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya" class="rounded-circle mb-2" style="width:56px;height:56px;object-fit:cover;">
+                        <div class="mb-2">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                        </div>
+                        <p class="mb-1">"InvoiceGen made my freelance billing so easy! Highly recommended."</p>
+                        <div class="small text-muted">- Priya, Designer</div>
+                    </div>
+                    <div class="review-slide about-card h-100 text-center">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Rahul" class="rounded-circle mb-2" style="width:56px;height:56px;object-fit:cover;">
+                        <div class="mb-2">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-half text-warning"></i>
+                        </div>
+                        <p class="mb-1">"Love the privacy-first approach. No signup, no hassle!"</p>
+                        <div class="small text-muted">- Rahul, Developer</div>
+                    </div>
+                    <div class="review-slide about-card h-100 text-center">
+                        <img src="https://randomuser.me/api/portraits/women/46.jpg" alt="Anjali" class="rounded-circle mb-2" style="width:56px;height:56px;object-fit:cover;">
+                        <div class="mb-2">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                        </div>
+                        <p class="mb-1">"Perfect for my small business. The PDF feature is a lifesaver."</p>
+                        <div class="small text-muted">- Anjali, Shop Owner</div>
+                    </div>
+                    <!-- Duplicate slides for infinite effect -->
+                    <div class="review-slide about-card h-100 text-center">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya" class="rounded-circle mb-2" style="width:56px;height:56px;object-fit:cover;">
+                        <div class="mb-2">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                        </div>
+                        <p class="mb-1">"InvoiceGen made my freelance billing so easy! Highly recommended."</p>
+                        <div class="small text-muted">- Priya, Designer</div>
+                    </div>
+                    <div class="review-slide about-card h-100 text-center">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Rahul" class="rounded-circle mb-2" style="width:56px;height:56px;object-fit:cover;">
+                        <div class="mb-2">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-half text-warning"></i>
+                        </div>
+                        <p class="mb-1">"Love the privacy-first approach. No signup, no hassle!"</p>
+                        <div class="small text-muted">- Rahul, Developer</div>
+                    </div>
+                    <div class="review-slide about-card h-100 text-center">
+                        <img src="https://randomuser.me/api/portraits/women/46.jpg" alt="Anjali" class="rounded-circle mb-2" style="width:56px;height:56px;object-fit:cover;">
+                        <div class="mb-2">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                        </div>
+                        <p class="mb-1">"Perfect for my small business. The PDF feature is a lifesaver."</p>
+                        <div class="small text-muted">- Anjali, Shop Owner</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="site-footer py-5">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3><i class="bi bi-info-circle-fill me-2"></i>About InvoiceGen</h3>
+                <p>Free invoice generator for freelancers, small businesses, and entrepreneurs. Simplify billing and get paid faster.</p>
+            </div>
+            <div class="footer-column">
+                <h3><i class="bi bi-link-45deg me-2"></i>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="home.html"><i class="bi bi-house-door me-1"></i> Home</a></li>
+                    <li><a href="about.html"><i class="bi bi-people me-1"></i> About Us</a></li>
+                    <li><a href="services.html"><i class="bi bi-gear me-1"></i> Services</a></li>
+                    <li><a href="contact.html"><i class="bi bi-envelope me-1"></i> Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3><i class="bi bi-briefcase-fill me-2"></i>Our Services</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="bi bi-file-earmark-text me-1"></i> Invoice Generator</a></li>
+                    <li><a href="#"><i class="bi bi-receipt me-1"></i> Receipt Maker</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3><i class="bi bi-telephone-fill me-2"></i> Contact Us</h3>
+                <p><i class="bi bi-envelope-at me-1"></i> Email: support@invoicegen.com</p>
+                <p><i class="bi bi-telephone me-1"></i> Phone: 123-4567</p>
+                <p><i class="bi bi-clock me-1"></i> Hours: Mon-Fri, 9am-5pm</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>InvoiceGen. All rights reserved by ayush.</p>
+        </div>
+    </footer>
+</body>
+</html> 

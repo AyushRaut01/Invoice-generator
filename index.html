@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Site Header */
+        .site-header {
+            background-color: #2c3e50;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .site-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-left: 30px;
+        }
+
+        .nav-menu a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #3498db;
+        }
+
+        .nav-menu a.active {
+            color: #3498db;
+        }
+
+        /* Site Footer */
+        .site-footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-column h3 {
+            color: #3498db;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-column p {
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #bdc3c7;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            color: #3498db;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #34495e;
+            font-size: 14px;
+            color: #bdc3c7;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        h3 {
+            color: #2c3e50;
+            margin: 15px 0;
+            font-size: 1.1rem;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
+        }
+
+        .tab:hover {
+            background-color: #f5f5f5;
+        }
+
+        .tab.active {
+            border-bottom: 3px solid #3498db;
+            color: #3498db;
+        }
+
+        /* Form Elements */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        input:invalid,
+        select:invalid,
+        textarea:invalid {
+            border-color: #e74c3c;
+            background-color: rgba(231, 76, 60, 0.05);
+        }
+        
+        .text-danger {
+            color: #e74c3c;
+        }
+        
+        .required-field-info {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        .required-field-info .text-danger {
+            font-weight: bold;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .prev-btn {
+            background-color: #95a5a6;
+        }
+
+        .prev-btn:hover {
+            background-color: #7f8c8d;
+        }
+
+        .download-btn {
+            background-color: #27ae60;
+        }
+
+        .download-btn:hover {
+            background-color: #219955;
+        }
+
+        /* Logo Upload */
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .logo-upload {
+            border: 2px dashed #ddd;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 5px;
+            border-radius: 4px;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: border-color 0.3s;
+        }
+
+        .logo-upload:hover {
+            border-color: #3498db;
+        }
+
+        .logo-preview {
+            max-width: 100px;
+            max-height: 80px;
+            margin-bottom: 10px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        /* Items Table */
+        .items-table {
+            margin-top: 20px;
+        }
+
+        .table-header {
+            display: flex;
+            background-color: #f5f5f5;
+            padding: 10px 0;
+            font-weight: 600;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .item-row {
+            display: flex;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+        }
+
+        .col {
+            padding: 0 10px;
+        }
+
+        .description {
+            flex: 3;
+        }
+
+        .quantity, .price, .tax, .discount {
+            flex: 1;
+        }
+
+        .total {
+            flex: 1;
+            text-align: right;
+        }
+
+        .action {
+            width: 50px;
+            text-align: center;
+        }
+
+        .remove-item {
+            background-color: #e74c3c;
+            color: white;
+            width: 30px;
+            height: 30px;
+            line-height: 1;
+            padding: 0;
+            border-radius: 50%;
+            font-size: 20px;
+        }
+
+        .remove-item:hover {
+            background-color: #c0392b;
+        }
+
+        #add-item {
+            margin: 20px 0;
+            background-color: #2ecc71;
+            display: inline-block;
+        }
+
+        #add-item:hover {
+            background-color: #27ae60;
+        }
+
+        /* Invoice Summary */
+        .invoice-summary {
+            margin-top: 30px;
+            margin-left: auto;
+            width: 300px;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .total-row {
+            font-weight: 700;
+            font-size: 1.1em;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+
+        /* Preview Section */
+        #invoice-preview {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .preview-container {
+            padding: 30px;
+        }
+
+        
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .header-left {
+            flex: 1;
+        }
+
+        .header-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 15px;
+        }
+        
+        .header-center h2 {
+            font-size: 2.5rem;
+            color: #3498db;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .header-right {
+            flex: 1;
+            text-align: right;
+        }
+        
+        .date-status-section {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .date-section {
+            display: flex;
+            gap: 30px;
+            margin-right: 20px;
+        }
+        
+        .date-container {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        
+        .status-container {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .billing-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+        
+        .billing-from,
+        .billing-to {
+            flex: 1;
+            max-width: 48%;
+        }
+        
+        .billing-to {
+            text-align: right;
+        }
+        
+        .billing-from h5,
+        .billing-to h5 {
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .client-main-info {
+            margin-bottom: 10px;
+        }
+
+        .business-logo-container {
+            width: 150px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            overflow: hidden;
+            background-color: transparent;
+        }
+
+        .business-logo-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .bold {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .date-value {
+            font-weight: 500;
+        }
+
+        .items-preview-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        /* Status tags */
+        .status-tag {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+
+        .status-paid {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-overdue {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-shipping {
+            background-color: #cce5ff;
+            color: #004085;
+            margin-bottom: 5px;
+        }
+
+        /* GST Split Table */
+        .gst-split {
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        .gst-split table {
+            width: 300px;
+            margin-left: auto;
+            border-collapse: collapse;
+        }
+        
+        .gst-split td {
+            padding: 8px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .gst-split td:last-child {
+            text-align: right;
+        }
+        
+        .total-row td {
+            font-weight: bold;
+            border-top: 2px solid #000;
+            border-bottom: none !important;
+        }
+
+        .bank-info {
+            white-space: pre-line;
+            font-family: monospace;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        /* Print Mode Styling */
+        .print-mode {
+            padding: 10px;
+            color: #000;
+        }
+
+        .print-mode .items-preview-table {
+            border: 1px solid #ddd;
+        }
+
+        .print-mode .items-preview-table th {
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+        }
+
+        .print-mode .items-preview-table td {
+            border: 1px solid #ddd;
+        }
+
+        .print-mode h2 {
+            color: #2c3e50;
+        }
+
+        @media print {
+            .no-print, .button-row, .tabs, .site-header, .site-footer {
+                display: none !important;
+            }
+            body {
+                background-color: white;
+                padding: 0;
+                margin: 0;
+            }
+            #invoice-preview {
+                box-shadow: none;
+                width: 100%;
+                max-width: 100%;
+                padding: 0;
+                margin: 0;
+            }
+            .preview-container {
+                padding: 0;
+            }
+            .header-section {
+                margin-bottom: 20px;
+            }
+            .header-left {
+                width: 40%;
+            }
+            .header-right {
+                width: 55%;
+            }
+            .items-preview-table {
+                page-break-inside: avoid;
+            }
+            .gst-split {
+                page-break-inside: avoid;
+            }
+            .row {
+                page-break-inside: avoid;
+            }
+            @page {
+                size: A4;
+                margin: 10mm;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .global-discount-input {
+            width: 70px;
+            display: inline-block;
+            height: 30px;
+            padding: 0.25rem 0.5rem;
+            font-size: 14px;
+        }
+        
+        .summary-label .d-flex {
+            display: flex;
+            align-items: center;
+        }
+        
+        .summary-label .me-2 {
+            margin-right: 0.5rem;
+        }
+        
+        .summary-label .ms-1 {
+            margin-left: 0.25rem;
+        }
+
+        .small {
+            font-size: 85%;
+            opacity: 0.8;
+        }
+
+        .about-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 16px rgba(44,62,80,0.07); padding: 32px 24px; text-align: center; transition: box-shadow 0.2s; }
+        .about-card:hover { box-shadow: 0 15px 32px rgba(44,62,80,0.18), 0 5.5px 10px rgba(44,62,80,0.10); }
+        .service-card { transition: box-shadow 0.2s; }
+        .service-card:hover { box-shadow: 0 15px 32px rgba(44,62,80,0.18), 0 5.5px 10px rgba(44,62,80,0.10); }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-container">
+            <a href="home.html" class="site-logo">InvoiceGen</a>
+            <ul class="nav-menu">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Create Your Invoice</h1>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="business-info">Business Info</div>
+            <div class="tab" data-tab="client-info">Client Info</div>
+            <div class="tab" data-tab="invoice-items">Invoice Items</div>
+            <div class="tab" data-tab="preview">Preview</div>
+        </div>
+        
+        <form id="invoice-form">
+            <!-- Business Information Section -->
+            <div class="tab-content active" id="business-info">
+                <h2>Business Information</h2>
+                
+                
+                <div class="form-section">
+                    <label for="business-logo">Business Logo</label>
+                    <div class="logo-upload">
+                        <div class="logo-preview">
+                            <img id="logo-image" alt="Add your logo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                        <p class="logo-text">Add your logo</p>
+                        <input type="file" id="business-logo" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="business-name">Business Name <span class="text-danger">*</span></label>
+                    <input type="text" id="business-name" name="business-name" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="business-email">Email <span class="text-danger">*</span></label>
+                        <input type="email" id="business-email" name="business-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="business-phone">Phone</label>
+                        <input type="tel" id="business-phone" name="business-phone" placeholder="Enter 10-digit number">
+                    </div>
+                </div>
+                
+                <h3>Business Address</h3>
+                
+                <div class="form-group">
+                    <label for="business-street">Street <span class="text-danger">*</span></label>
+                    <input type="text" id="business-street" name="business-street" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="business-apartment">Apartment, suite</label>
+                        <input type="text" id="business-apartment" name="business-apartment">
+                    </div>
+                    <div class="form-group">
+                        <label for="business-city">City</label>
+                        <input type="text" id="business-city" name="business-city">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="business-zip">Zip Code</label>
+                        <input type="text" id="business-zip" name="business-zip">
+                    </div>
+                    <div class="form-group">
+                        <label for="business-country">Country</label>
+                        <select id="business-country" name="business-country">
+                            <option value="">Select a country</option>
+                            <option value="US">United States</option>
+                            <option value="CA">Canada</option>
+                            <option value="UK">United Kingdom</option>
+                            <option value="AU">Australia</option>
+                            <option value="IN">India</option>
+                            <!-- Add more countries as needed -->
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="business-id">Business ID</label>
+                        <input type="text" id="business-id" name="business-id">
+                    </div>
+                    <div class="form-group">
+                        <label for="tax-id">Tax ID</label>
+                        <input type="text" id="tax-id" name="tax-id">
+                    </div>
+                </div>
+                
+                <h3>Bank Details</h3>
+                
+                <div class="form-group">
+                    
+                    <textarea id="bank-info" name="bank-info" rows="4" placeholder="Account holder: John Doe&#10;Bank name: Example Bank&#10;Account no.: 123456789&#10;SWIFT/BIC: EXAMPLEXXX"></textarea>
+                </div>
+                
+                <div class="button-row">
+                    <button type="button" class="next-btn">Next</button>
+                </div>
+            </div>
+            
+            <!-- Client Information Section -->
+            <div class="tab-content" id="client-info">
+                <h2>Client Information</h2>
+                
+               
+                
+                <div class="form-group">
+                    <label for="client-name">Client Name <span class="text-danger">*</span></label>
+                    <input type="text" id="client-name" name="client-name" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="client-email">Email <span class="text-danger">*</span></label>
+                        <input type="email" id="client-email" name="client-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="client-phone">Phone</label>
+                        <input type="tel" id="client-phone" name="client-phone" placeholder="Enter 10-digit number">
+                    </div>
+                </div>
+                
+                <h3>Client Address</h3>
+                
+                <div class="form-group">
+                    <label for="client-street">Street <span class="text-danger">*</span></label>
+                    <input type="text" id="client-street" name="client-street" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="client-apartment">Apartment, suite</label>
+                        <input type="text" id="client-apartment" name="client-apartment">
+                    </div>
+                    <div class="form-group">
+                        <label for="client-city">City</label>
+                        <input type="text" id="client-city" name="client-city">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="client-zip">Zip Code</label>
+                        <input type="text" id="client-zip" name="client-zip">
+                    </div>
+                    <div class="form-group">
+                        <label for="client-country">Country</label>
+                        <select id="client-country" name="client-country">
+                            <option value="">Select a country</option>
+                            <option value="US">United States</option>
+                            <option value="CA">Canada</option>
+                            <option value="UK">United Kingdom</option>
+                            <option value="AU">Australia</option>
+                            <option value="IN">India</option>
+                            <!-- Add more countries as needed -->
+                        </select>
+                    </div>
+                </div>
+                
+                <h3>Invoice Details</h3>
+                
+                <div class="form-group">
+                    <label for="invoice-number">Invoice Number <span class="text-danger">*</span></label>
+                    <input type="text" id="invoice-number" name="invoice-number" value="INV-001" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="invoice-date">Invoice Date <span class="text-danger">*</span></label>
+                        <input type="date" id="invoice-date" name="invoice-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="due-date">Due Date <span class="text-danger">*</span></label>
+                        <input type="date" id="due-date" name="due-date" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="currency">Currency</label>
+                        <select id="currency" name="currency">
+                            <option value="USD">USD - US Dollar</option>
+                            <option value="EUR">EUR - Euro</option>
+                            <option value="GBP">GBP - British Pound</option>
+                            <option value="JPY">JPY - Japanese Yen</option>
+                            <!-- Add more currencies as needed -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="payment-method">Payment Method</label>
+                        <input type="text" id="payment-method" name="payment-method" placeholder="Bank Transfer, PayPal, etc.">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="shipping-status">Shipping Status</label>
+                        <select id="shipping-status" name="shipping-status">
+                            <option value="awaiting">Awaiting processing</option>
+                            <option value="processing">Processing</option>
+                            <option value="shipped">Shipped</option>
+                            <option value="delivered">Delivered</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="payment-status">Payment Status</label>
+                        <select id="payment-status" name="payment-status">
+                            <option value="pending">Pending payment</option>
+                            <option value="partial">Partially paid</option>
+                            <option value="paid">Paid</option>
+                            <option value="overdue">Overdue</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="button-row">
+                    <button type="button" class="prev-btn">Previous</button>
+                    <button type="button" class="next-btn">Next</button>
+                </div>
+            </div>
+            
+            <!-- Invoice Items Section -->
+            <div class="tab-content" id="invoice-items">
+                <h2>Invoice Items</h2>
+                
+                
+                
+                <div class="items-table">
+                    <div class="table-header">
+                        <div class="col description">Description <span class="text-danger">*</span></div>
+                        <div class="col quantity">Quantity <span class="text-danger">*</span></div>
+                        <div class="col price">Price <span class="text-danger">*</span></div>
+                        <div class="col tax">Tax (%)</div>
+                        <div class="col total">Total</div>
+                        <div class="col action"></div>
+                    </div>
+                    
+                    <div id="items-container">
+                        <div class="item-row" data-item-id="1">
+                            <div class="col description">
+                                <input type="text" name="item-description-1" class="item-description" required>
+                            </div>
+                            <div class="col quantity">
+                                <input type="number" name="item-quantity-1" class="item-quantity" value="1" min="1" required>
+                            </div>
+                            <div class="col price">
+                                <input type="number" name="item-price-1" class="item-price" value="0" min="0" step="0.01" required>
+                            </div>
+                            <div class="col tax">
+                                <input type="number" name="item-tax-1" class="item-tax" value="0" min="0">
+                            </div>
+                            <div class="col total">
+                                <span class="item-total">0.00</span>
+                            </div>
+                            <div class="col action">
+                                <button type="button" class="remove-item">×</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="button" id="add-item">+ Add Item</button>
+                    
+                    <div class="invoice-summary">
+                        <div class="summary-row">
+                            <div class="summary-label">Subtotal:</div>
+                            <div class="summary-value"><span class="preview-currency">$</span> <span id="subtotal">0.00</span></div>
+                        </div>
+                        <div class="summary-row discount-row">
+                            <div class="summary-label">
+                                <div class="d-flex align-items-center">
+                                    <label for="global-discount" class="me-2">Discount:</label>
+                                    <input type="number" id="global-discount" class="form-control form-control-sm global-discount-input" value="0" min="0" max="100"> <span class="ms-1">%</span>
+                                </div>
+                            </div>
+                            <div class="summary-value"><span class="preview-currency">$</span> <span id="discount-total">0.00</span></div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-label">Tax:</div>
+                            <div class="summary-value"><span class="preview-currency">$</span> <span id="tax-total">0.00</span></div>
+                        </div>
+                        <div class="summary-row total-row">
+                            <div class="summary-label">Total:</div>
+                            <div class="summary-value"><span class="preview-currency">$</span> <span id="grand-total">0.00</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notes">Notes</label>
+                        <textarea id="notes" name="notes" rows="4" placeholder="Additional information, terms and conditions, etc."></textarea>
+                    </div>
+                    
+                    <div class="button-row">
+                        <button type="button" class="prev-btn">Previous</button>
+                        <button type="button" class="next-btn">Next</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Preview Section -->
+            <div class="tab-content" id="preview">
+                <h2>Preview Your Invoice</h2>
+                
+                <div id="invoice-preview">
+                    <div class="preview-container" id="invoice-to-pdf">
+                        <div class="header-section">
+                            <div class="header-left">
+                                <div class="business-logo-container">
+                                    <img id="preview-logo" src="" alt="" class="logo-preview">
+                                </div>
+                            </div>
+                            <div class="header-center">
+                                <h2 class="text-primary">INVOICE</h2>
+                            </div>
+                            <div class="header-right">
+                                <div class="mb-3">
+                                    <label class="form-label">Invoice Number</label>
+                                    <div id="preview-invoice-number" class="invoice-number-container"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="date-status-section">
+                            <div class="date-section">
+                                <div class="date-container">
+                                    <label class="form-label">Invoice Date</label>
+                                    <div id="preview-invoice-date" class="date-value"></div>
+                                </div>
+                                <div class="date-container">
+                                    <label class="form-label">Due Date</label>
+                                    <div id="preview-due-date" class="date-value"></div>
+                                </div>
+                            </div>
+                            <div class="status-container">
+                                <div id="preview-shipping-status" class="status-tag status-shipping"></div>
+                                <div id="preview-payment-status" class="status-tag status-pending"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="billing-section">
+                            <div class="billing-from">
+                                <h5 class="text-secondary">From</h5>
+                                <div id="billing-business-name" class="bold"></div>
+                                <div id="billing-business-address"></div>
+                                <div id="billing-business-contact"></div>
+                                <div class="tax-info">
+                                    <div id="billing-business-id"></div>
+                                    <div id="billing-tax-id"></div>
+                                </div>
+                            </div>
+                            <div class="billing-to">
+                                <h5 class="text-secondary">To</h5>
+                                <div id="billing-client-name" class="bold"></div>
+                                <div id="billing-client-contact"></div>
+                                <div id="billing-client-address"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="preview-items">
+                            <h4 class="mb-3">Items</h4>
+                            <div class="table-responsive">
+                                <table class="table table-bordered items-preview-table">
+                                    <thead class="table-light">
+                                    <tr>
+                                            <th style="width: 40%">Description</th>
+                                            <th style="width: 15%">Quantity</th>
+                                            <th style="width: 15%">Price</th>
+                                            <th style="width: 10%">Tax (%)</th>
+                                            <th style="width: 20%">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="preview-items-container">
+                                    <!-- Items will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                            </div>
+                            
+                            <div class="gst-split">
+                                <table>
+                                    <tr>
+                                        <td>Subtotal</td>
+                                        <td><span class="preview-currency">$</span> <span id="preview-subtotal">0.00</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Discount <span class="small">(0%)</span></td>
+                                        <td><span class="preview-currency">$</span> <span id="preview-discount-total">0.00</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tax</td>
+                                        <td><span class="preview-currency">$</span> <span id="preview-tax-total">0.00</span></td>
+                                    </tr>
+                                    <tr class="total-row">
+                                        <td>Total Amount</td>
+                                        <td><span class="preview-currency">$</span> <span id="preview-grand-total">0.00</span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <h5>Payment Details</h5>
+                                <div id="preview-payment-method"></div>
+                                <div id="preview-bank-info" class="bank-info"></div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <h5>Notes</h5>
+                                <div id="preview-notes"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="button-row">
+                        <button type="button" class="prev-btn">Previous</button>
+                        <button type="button" id="download-pdf" class="download-btn">Print Invoice</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3><i class="bi bi-info-circle-fill me-2"></i>About InvoiceGen</h3>
+                <p>it is free invoice generator tool that helps freelancers, small businesses, and entrepreneurs create professional invoices in seconds.</p>
+                <p>Our mission is to simplify billing and help you get paid faster.</p>
+            </div>
+            <div class="footer-column">
+                <h3><i class="bi bi-link-45deg me-2"></i>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="home.html"><i class="bi bi-house-door me-1"></i> Home</a></li>
+                    <li><a href="about.html"><i class="bi bi-people me-1"></i> About Us</a></li>
+                    <li><a href="services.html"><i class="bi bi-gear me-1"></i> Services</a></li>
+                    <li><a href="contact.html"><i class="bi bi-envelope me-1"></i> Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3><i class="bi bi-briefcase-fill me-2"></i>Our Services</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="bi bi-file-earmark-text me-1"></i> Invoice Generator</a></li>
+                    <li><a href="#"><i class="bi bi-receipt me-1"></i> Receipt Maker</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3><i class="bi bi-telephone-fill me-2"></i> Contact Us</h3>
+                <p><i class="bi bi-envelope-at me-1"></i> Email: invoicegen.com</p>
+                <p><i class="bi bi-telephone me-1"></i> Phone: 123-4567</p>
+                <p><i class="bi bi-clock me-1"></i> Hours: Monday-Friday, 9am-5pm</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p> InvoiceGen. All rights reserved by ayush.</p>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
